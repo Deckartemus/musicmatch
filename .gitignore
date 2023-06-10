@@ -1,0 +1,19 @@
+# General
+node_modules
+*.sql
+
+# Env files
+.env
+.env.local
+.env.dev
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
