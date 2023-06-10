@@ -1,0 +1,30 @@
+{
+  "name": "musicmatch-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && babel src -d dist",
+    "start": "yarn build && nodemon dist/index.js",
+    "serve": "node dist/index.js"
+  },
+  "author": "Mateusz Eckardt",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "@hapi/boom": "^10.0.1",
+    "dotenv": "^16.1.4",
+    "glob": "^10.2.7",
+    "ramda": "^0.29.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/eslint-parser": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "@babel/register": "^7.21.0",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "babel-polyfill": "^6.26.0"
+  }
+}

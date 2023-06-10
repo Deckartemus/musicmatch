@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  # This is replicates the docker-compose inside app directory
+  # in order to spin up all containers grouped together in our development environment
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - "./backend:/app:delegated"
+      - "/app/node_modules"
+    ports:
+      - "8080:3000"
+    networks:
+      - musicmatch
+#    depends_on:
+#      testDB:
+#        condition: service_healthy
+
+#  testDB:
+#    image: mysql:5.7
+#    #platform: linux/amd64 #for platform error on Apple M1 chips
+#    platform: linux/x86_64
+#    ports:
+#      - "3306:3306"
+#    restart: always
+#    env_file: .env
+#    environment:
+#      - MYSQL_DATABASE=${DATABASE_NAME}
+#      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+#      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+#      - MYSQL_USER=${DATABASE_USERNAME}
+#    volumes:
+#      - backend-data:/var/lib/mysql
+#    networks:
+#      - widget
+#    healthcheck:
+#      test: [ "CMD", "mysqladmin" ,"ping", "-h", "127.0.0.1", "-u", "${DATABASE_USERNAME}", "--password=${DATABASE_PASSWORD}"]
+#      start_period: 5s
+#      interval: 5s
+#      timeout: 5s
+#      retries: 10
+
+volumes:
+  backend-data:
+
+networks:
+  musicmatch:
+    name: Musicmatch
+    driver: bridge
