@@ -5,7 +5,7 @@ exports.plugin = {
     server.route({
       method: "GET",
       path: "/",
-      handler: (request, h) => h.response("Testing nodemon").code(200),
+      handler: (request, h) => h.response("Working").code(200),
     });
   },
 };

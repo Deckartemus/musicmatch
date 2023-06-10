@@ -16,7 +16,7 @@ exports.plugin = {
               method: "GET",
               path: "/",
               handler: function handler(request, h) {
-                return h.response("Testing nodemon").code(200);
+                return h.response("Testing nodemon and docker").code(200);
               }
             });
           case 1:
