@@ -21,7 +21,10 @@ var init = /*#__PURE__*/function () {
         case 0:
           server = _hapi["default"].server({
             port: 3000,
-            host: "0.0.0.0"
+            host: "0.0.0.0",
+            debug: {
+              request: ["error"]
+            }
           });
           routes = (0, _glob.globSync)("/routes/**/*.js", {
             root: __dirname
