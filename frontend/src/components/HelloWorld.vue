@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
-
+import { anyPass, isEmpty, isNil } from "ramda";
+const isNilOrEmpty = anyPass([isNil, isEmpty]);
 const countries = [
   {
     name: "Germany",
@@ -15,7 +16,7 @@ const countries = [
     code: "fr",
   },
 ];
-const list = ref([]);
+const list = ref();
 
 const checkCountry = async countryCode => {
   console.log(countryCode);
@@ -24,9 +25,8 @@ const checkApi = async () => {
   list.value = await fetch("http://localhost:3000/api/artists")
     .then(response => response.json())
     .then(data => {
-      return data.message;
+      return data.message.body.artist_list;
     });
-  console.log(list.value.body);
 };
 </script>
 
@@ -39,9 +39,11 @@ const checkApi = async () => {
     </div>
   </div>
   <button @click="checkApi">check api</button>
-  <div v-if="list.length > 0">
+  <div v-if="!isNilOrEmpty(list)">
     <div v-for="artist in list">
-      {{ artist }}
+      <pre>
+        {{ artist.artist.artist_name }}
+      </pre>
     </div>
   </div>
 </template>

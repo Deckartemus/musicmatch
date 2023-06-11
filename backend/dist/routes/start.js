@@ -14,7 +14,7 @@ exports.plugin = {
           case 0:
             server.route({
               method: "GET",
-              path: "/",
+              path: "/api",
               handler: function handler(request, h) {
                 return h.response("Working now").code(200);
               }
