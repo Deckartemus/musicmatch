@@ -4,7 +4,7 @@ exports.plugin = {
   register: async (server /*, options*/) => {
     server.route({
       method: "GET",
-      path: "/",
+      path: "/api",
       handler: (request, h) => h.response("Working now").code(200),
     });
   },

@@ -5,13 +5,13 @@ import vue from "@vitejs/plugin-vue";
 export default defineConfig({
   server: {
     port: 8080,
-    proxy: {
-      "^/api": {
-        target: "http://backend:3000",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    // proxy: {
+    //   "^/api": {
+    //     target: "http://backend:3000",
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    // },
   },
 
   plugins: [vue()],

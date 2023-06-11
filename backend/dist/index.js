@@ -24,6 +24,9 @@ var init = /*#__PURE__*/function () {
             host: "0.0.0.0",
             debug: {
               request: ["error"]
+            },
+            routes: {
+              cors: true
             }
           });
           routes = (0, _glob.globSync)("/routes/**/*.js", {

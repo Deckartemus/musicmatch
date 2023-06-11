@@ -6,7 +6,7 @@ exports.plugin = {
   register: async (server /*, options*/) => {
     server.route({
       method: "GET",
-      path: "/artists",
+      path: "/api/artists",
       handler: (request, h) => {
         return fetch(
           `https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=de&apikey=${apiKey}`,

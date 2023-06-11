@@ -15,7 +15,7 @@ exports.plugin = {
           case 0:
             server.route({
               method: "GET",
-              path: "/artists",
+              path: "/api/artists",
               handler: function handler(request, h) {
                 return fetch("https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=de&apikey=".concat(apiKey)).then(function (response) {
                   return response.json();

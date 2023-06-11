@@ -8,6 +8,9 @@ const init = async () => {
     port: 3000,
     host: "0.0.0.0",
     debug: { request: ["error"] },
+    routes: {
+      cors: true,
+    },
   });
 
   const routes = globSync("/routes/**/*.js", { root: __dirname }).map(file =>
