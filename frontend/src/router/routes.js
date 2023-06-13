@@ -1,4 +1,4 @@
-import HelloWorld from "../components/HelloWorld.vue";
+import HelloWorld from "@Components/Home.vue";
 
 const routes = [{ path: "/", component: HelloWorld }];
 
