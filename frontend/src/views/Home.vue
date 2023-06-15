@@ -1,18 +1,16 @@
 <template>
-  <div :class="$style.Main">
-    <h1 :class="$style.Headline">Welcome to Musicmatch API!</h1>
-    <div>
-      <h3>
-        Please select a country to check which artists are the most popular ones
-        in that country!
-      </h3>
-      <div :class="$style.Countries">
-        <div
-          v-for="{ name, code } in countries"
-          @click="goToCountry(name, code)"
-          :class="$style.Country">
-          {{ name }}
-        </div>
+  <h1 :class="$style.Headline">Welcome to Musicmatch API!</h1>
+  <div :class="$style.HomeWrapper">
+    <h3>
+      Please select a country to check which artists are the most popular ones
+      in that country!
+    </h3>
+    <div :class="$style.Countries">
+      <div
+        v-for="{ name, code } in countries"
+        @click="goToCountry(name, code)"
+        :class="$style.Country">
+        {{ name }}
       </div>
     </div>
   </div>
@@ -30,14 +28,16 @@ const goToCountry = (countryName, code) => {
 </script>
 
 <style module>
-.Main {
-  width: 50%;
-  margin: auto;
-}
 .Headline {
   color: #1acb9d;
   font-weight: 600;
   font-size: 3rem;
+}
+
+.HomeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .Countries {

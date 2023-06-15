@@ -1,11 +1,15 @@
 <script setup>
 import utils from "@utils/index";
 import useArtists from "../services/useArtists.js";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const { isNilOrEmpty } = utils;
 const route = useRoute();
+const router = useRouter();
 const { artists } = useArtists(route.params.code);
+const goBack = () => {
+  router.push("/");
+};
 </script>
 
 <template>
@@ -14,9 +18,12 @@ const { artists } = useArtists(route.params.code);
     <span :class="$style.CountryName">{{ route.params.countryName }}</span>
   </div>
   <div v-if="!isNilOrEmpty(artists)" :class="$style.ArtistList">
-    <div v-for="artist in artists.artists" :class="$style.Artist">
-      {{ artist.artist.artist_name }}
+    <div v-for="{ name } in artists" :class="$style.Artist">
+      {{ name }}
     </div>
+  </div>
+  <div :class="$style.BackButton" @click="goBack">
+    Check a different country!
   </div>
 </template>
 
@@ -33,7 +40,7 @@ const { artists } = useArtists(route.params.code);
 
 .ArtistList {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   width: min-content;
   align-items: center;
   margin: auto;
@@ -88,5 +95,20 @@ const { artists } = useArtists(route.params.code);
   background-color: transparent;
   border-color: aquamarine;
   color: white;
+}
+
+.BackButton {
+  margin: 2rem auto 0 auto;
+  border: 0.0625rem solid white;
+  border-radius: 1rem;
+  width: fit-content;
+  padding: 2rem;
+  transition: all 0.75s;
+  cursor: pointer;
+}
+
+.BackButton:hover {
+  color: aquamarine;
+  background-color: rgba(139, 0, 139, 0.99);
 }
 </style>

@@ -14,18 +14,28 @@ export async function fetchArtists(countryCode) {
     const data = await fetch(`${url}/${params}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         return data.message.body.artist_list;
       });
     if (data) {
       artists.value = data;
-      console.log(artists.value);
     }
   } catch (err) {
     console.log(err);
   }
 }
 
+const remappedData = artistsData => {
+  console.log(artistsData);
+  const mapped = artistsData.map(item => {
+    return {
+      name: item.artist.artist_name,
+      artistId: item.artist.artist_id,
+    };
+  });
+  console.log(mapped);
+  return mapped;
+};
+// console.log(remappedData());
 export default countryCode => {
   (async () => {
     await fetchArtists(countryCode);
@@ -34,9 +44,7 @@ export default countryCode => {
   return {
     artists: computed(() => {
       if (!isNilOrEmpty(artists.value)) {
-        return {
-          artists: artists.value,
-        };
+        return remappedData(artists.value);
       }
       return undefined;
     }),
