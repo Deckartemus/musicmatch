@@ -8,8 +8,8 @@ const countries = [
     code: "it",
   },
   {
-    name: "France",
-    code: "fr",
+    name: "Poland",
+    code: "pl",
   },
 ];
 

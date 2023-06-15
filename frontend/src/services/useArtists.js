@@ -1,4 +1,3 @@
-import API_URL_BACKEND from "@constants/env.js";
 import { stringify } from "qs";
 import { computed, ref } from "vue";
 import helpers from "@utils";
@@ -7,18 +6,23 @@ const artists = ref();
 const { isNilOrEmpty } = helpers;
 
 export async function fetchArtists(countryCode) {
-  const url = `${API_URL_BACKEND}/api/artists`;
+  const url = `http://localhost:3000/api/artists`;
   const params = stringify({
     countryCode,
   });
-  const data = await fetch(`${url}/${params}`)
-    .then(response => response.json())
-    .then(data => {
-      return data.message.body.artist_list;
-    });
-
-  if (data) {
-    artists.value = data;
+  try {
+    const data = await fetch(`${url}/${params}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        return data.message.body.artist_list;
+      });
+    if (data) {
+      artists.value = data;
+      console.log(artists.value);
+    }
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -28,9 +32,11 @@ export default countryCode => {
   })();
 
   return {
-    eventData: computed(() => {
+    artists: computed(() => {
       if (!isNilOrEmpty(artists.value)) {
-        return {};
+        return {
+          artists: artists.value,
+        };
       }
       return undefined;
     }),

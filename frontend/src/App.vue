@@ -1,9 +1,7 @@
-<script setup>
-import Home from "./views/Home.vue";
-</script>
+<script setup></script>
 
 <template>
-  <Home />
+  <router-view :key="$route.fullPath"></router-view>
 </template>
 
 <style scoped></style>

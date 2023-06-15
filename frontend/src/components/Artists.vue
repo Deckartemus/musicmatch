@@ -1,47 +1,92 @@
 <script setup>
-import { ref } from "vue";
-import { stringify } from "qs";
 import utils from "@utils/index";
+import useArtists from "../services/useArtists.js";
+import { useRoute } from "vue-router";
 
-import API_URL_BACKEND from "@constants/env.js";
-
-defineProps({
-  countryName: {
-    type: String,
-    required: true,
-  },
-  countryCode: {
-    type: String,
-  },
-});
-
-const list = ref();
 const { isNilOrEmpty } = utils;
-
-const fetchArtists = async countryCode => {
-  const url = `${API_URL_BACKEND}/api/artists`;
-  const params = stringify({
-    countryCode,
-  });
-  list.value = await fetch(`${url}/${params}`)
-    .then(response => response.json())
-    .then(data => {
-      return data.message.body.artist_list;
-    });
-};
+const route = useRoute();
+const { artists } = useArtists(route.params.code);
 </script>
 
 <template>
-  <div @click="fetchArtists(countryCode)">
-    {{ countryName }}
+  <div :class="$style.ArtistsListHeadline">
+    Here is the list of TOP10 artists in
+    <span :class="$style.CountryName">{{ route.params.countryName }}</span>
   </div>
-  <div v-if="!isNilOrEmpty(list)">
-    <div v-for="artist in list">
-      <pre>
-        {{ artist.artist.artist_name }}
-      </pre>
+  <div v-if="!isNilOrEmpty(artists)" :class="$style.ArtistList">
+    <div v-for="artist in artists.artists" :class="$style.Artist">
+      {{ artist.artist.artist_name }}
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style module>
+.CountryName {
+  color: rgba(139, 0, 139, 0.99);
+}
+
+.ArtistsListHeadline {
+  margin-bottom: 3rem;
+  font-size: 4rem;
+  color: aquamarine;
+}
+
+.ArtistList {
+  display: flex;
+  gap: 2rem;
+  width: min-content;
+  align-items: center;
+  margin: auto;
+}
+
+.Artist {
+  display: inline-flex;
+  height: fit-content;
+  justify-content: center;
+  border: solid 0.0625rem aquamarine;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: aquamarine;
+  transition: all 0.75s;
+  color: aquamarine;
+  cursor: pointer;
+}
+
+.ArtistList {
+  animation-name: motion;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+.ArtistList:hover {
+  animation-play-state: paused;
+}
+
+@keyframes motion {
+  0% {
+    align-items: center;
+  }
+
+  25% {
+    align-items: flex-end;
+  }
+
+  50% {
+    align-items: center;
+  }
+
+  75% {
+    align-items: flex-start;
+  }
+
+  100% {
+    align-items: center;
+  }
+}
+
+.Artist:hover {
+  background-color: transparent;
+  border-color: aquamarine;
+  color: white;
+}
+</style>

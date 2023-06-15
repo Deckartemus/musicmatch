@@ -10,7 +10,7 @@ exports.plugin = {
       handler: (request, h) => {
         // return console.log(request.path, request.params);
         return fetch(
-          `https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=3&country=${request.params.countryCode}&apikey=${apiKey}`,
+          `https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=10&country=${request.params.countryCode}&apikey=${apiKey}`,
         )
           .then(response => response.json())
           .then(data => {

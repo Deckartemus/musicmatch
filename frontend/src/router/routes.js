@@ -3,7 +3,7 @@ import Artists from "@Components/Artists.vue";
 
 const routes = [
   { path: "/", component: Home },
-  { path: "/artists/:countryName", name: "artists", component: Artists },
+  { path: "/artists/:countryName/:code", name: "artists", component: Artists },
 ];
 
 export default routes;
