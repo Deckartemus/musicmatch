@@ -10,12 +10,14 @@ export async function fetchArtists(countryCode) {
   const params = stringify({
     countryCode,
   });
+
   try {
     const data = await fetch(`${url}/${params}`)
       .then(response => response.json())
       .then(data => {
         return data.message.body.artist_list;
       });
+
     if (data) {
       artists.value = data;
     }

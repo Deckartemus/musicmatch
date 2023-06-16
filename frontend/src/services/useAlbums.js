@@ -10,12 +10,14 @@ export async function fetchAlbums(artistId) {
   const params = stringify({
     artistId,
   });
+
   try {
     const data = await fetch(`${url}/${params}`)
       .then(response => response.json())
       .then(data => {
         return data.message.body.album_list;
       });
+
     if (data) {
       albums.value = data;
     }
