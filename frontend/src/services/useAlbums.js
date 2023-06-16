@@ -31,6 +31,7 @@ const remappedData = data => {
     };
   });
 };
+
 export default artistId => {
   (async () => {
     await fetchAlbums(artistId);
