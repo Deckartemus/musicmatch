@@ -2,22 +2,22 @@ import { stringify } from "qs";
 import { computed, ref } from "vue";
 import helpers from "@utils";
 
-const artists = ref();
+const albums = ref();
 const { isNilOrEmpty } = helpers;
 
-export async function fetchArtists(countryCode) {
-  const url = `http://localhost:3000/api/artists`;
+export async function fetchAlbums(artistId) {
+  const url = `http://localhost:3000/api/albums`;
   const params = stringify({
-    countryCode,
+    artistId,
   });
   try {
     const data = await fetch(`${url}/${params}`)
       .then(response => response.json())
       .then(data => {
-        return data.message.body.artist_list;
+        return data.message.body.album_list;
       });
     if (data) {
-      artists.value = data;
+      albums.value = data;
     }
   } catch (err) {
     console.log(err);
@@ -27,21 +27,19 @@ export async function fetchArtists(countryCode) {
 const remappedData = data => {
   return data.map(item => {
     return {
-      name: item.artist.artist_name,
-      artistId: item.artist.artist_id,
+      name: item.album.album_name,
     };
   });
 };
-
-export default countryCode => {
+export default artistId => {
   (async () => {
-    await fetchArtists(countryCode);
+    await fetchAlbums(artistId);
   })();
 
   return {
-    artists: computed(() => {
-      if (!isNilOrEmpty(artists.value)) {
-        return remappedData(artists.value);
+    albums: computed(() => {
+      if (!isNilOrEmpty(albums.value)) {
+        return remappedData(albums.value);
       }
       return undefined;
     }),

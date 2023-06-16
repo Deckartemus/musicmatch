@@ -16,6 +16,7 @@ export default defineConfig({
       "@assets": resolve(_dirname, "./src/assets"),
       "@constants": resolve(_dirname, "./src/constants"),
       "@utils": resolve(_dirname, "./src/utils"),
+      "@services": resolve(_dirname, "./src/services"),
       "@router": resolve(_dirname, "./src/router"),
       "@views": resolve(_dirname, "./src/views"),
       "@Components": resolve(_dirname, "./src/components"),

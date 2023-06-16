@@ -1,5 +1,5 @@
 <template>
-  <h1 :class="$style.Headline">Welcome to Musicmatch API!</h1>
+  <h1 :class="$style.Headline">Welcome to Musixmatch API!</h1>
   <div :class="$style.HomeWrapper">
     <h3>
       Please select a country to check which artists are the most popular ones

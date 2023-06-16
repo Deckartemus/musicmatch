@@ -1,6 +1,6 @@
 <script setup>
 import utils from "@utils/index";
-import useArtists from "../services/useArtists.js";
+import useArtists from "@services/useArtists.js";
 import { useRoute, useRouter } from "vue-router";
 
 const { isNilOrEmpty } = utils;
@@ -10,6 +10,10 @@ const { artists } = useArtists(route.params.code);
 const goBack = () => {
   router.push("/");
 };
+const goToAlbums = (name, artistId) => {
+  console.log(artistId, name);
+  router.push({ name: "albums", params: { name, artistId } });
+};
 </script>
 
 <template>
@@ -18,7 +22,10 @@ const goBack = () => {
     <span :class="$style.CountryName">{{ route.params.countryName }}</span>
   </div>
   <div v-if="!isNilOrEmpty(artists)" :class="$style.ArtistList">
-    <div v-for="{ name } in artists" :class="$style.Artist">
+    <div
+      v-for="{ name, artistId } in artists"
+      :class="$style.Artist"
+      @click="goToAlbums(name, artistId)">
       {{ name }}
     </div>
   </div>
