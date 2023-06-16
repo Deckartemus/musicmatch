@@ -2,6 +2,7 @@
 import utils from "@utils/index";
 import useArtists from "@services/useArtists.js";
 import { useRoute, useRouter } from "vue-router";
+import Button from "@Components/Button.vue";
 
 const { isNilOrEmpty } = utils;
 const route = useRoute();
@@ -11,7 +12,6 @@ const goBack = () => {
   router.push("/");
 };
 const goToAlbums = (name, artistId) => {
-  console.log(artistId, name);
   router.push({ name: "albums", params: { name, artistId } });
 };
 </script>
@@ -29,9 +29,7 @@ const goToAlbums = (name, artistId) => {
       {{ name }}
     </div>
   </div>
-  <div :class="$style.BackButton" @click="goBack">
-    Check a different country!
-  </div>
+  <Button @onClick="goBack"></Button>
 </template>
 
 <style module>
@@ -102,20 +100,5 @@ const goToAlbums = (name, artistId) => {
   background-color: transparent;
   border-color: aquamarine;
   color: white;
-}
-
-.BackButton {
-  margin: 2rem auto 0 auto;
-  border: 0.0625rem solid white;
-  border-radius: 1rem;
-  width: fit-content;
-  padding: 2rem;
-  transition: all 0.75s;
-  cursor: pointer;
-}
-
-.BackButton:hover {
-  color: aquamarine;
-  background-color: rgba(139, 0, 139, 0.99);
 }
 </style>

@@ -1,17 +1,22 @@
 <template>
-  <div>Album list for {{ route.params.name }}</div>
-  <div v-if="!isNilOrEmpty(albums)" v-for="{ name } in albums">
+  <div :class="$style.AlbumsListHeadline">
+    Album list for
+    <span :class="$style.ArtistName">{{ route.params.name }}</span>
+  </div>
+  <div
+    v-if="!isNilOrEmpty(albums)"
+    v-for="{ name } in albums"
+    :class="$style.Album">
     {{ name }}
   </div>
-  <div :class="$style.BackButton" @click="goBack">
-    Check a different artist!
-  </div>
+  <Button @onClick="goBack"></Button>
 </template>
 
 <script setup>
 import useAlbums from "@services/useAlbums.js";
 import { useRoute, useRouter } from "vue-router";
 import utils from "@utils";
+import Button from "@Components/Button.vue";
 
 const { isNilOrEmpty } = utils;
 
@@ -24,18 +29,21 @@ const goBack = () => {
 </script>
 
 <style module>
-.BackButton {
-  margin: 2rem auto 0 auto;
-  border: 0.0625rem solid white;
-  border-radius: 1rem;
-  width: fit-content;
-  padding: 2rem;
-  transition: all 0.75s;
-  cursor: pointer;
+.AlbumsListHeadline {
+  margin-bottom: 3rem;
+  font-size: 4rem;
+  color: aquamarine;
 }
 
-.BackButton:hover {
-  color: aquamarine;
-  background-color: rgba(139, 0, 139, 0.99);
+.ArtistName {
+  color: rgba(139, 0, 139, 0.99);
+}
+
+.Album {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: solid 0.0625rem white;
+  padding: 1rem;
 }
 </style>
