@@ -17,11 +17,10 @@ exports.plugin = {
               method: "GET",
               path: "/api/artists/countryCode={countryCode}",
               handler: function handler(request, h) {
-                // return console.log(request.path, request.params);
                 return fetch("https://api.musixmatch.com/ws/1.1/chart.artists.get?page=1&page_size=10&country=".concat(request.params.countryCode, "&apikey=").concat(apiKey)).then(function (response) {
                   return response.json();
                 }).then(function (data) {
-                  return data;
+                  return h.response(data).code(200);
                 })["catch"](function (err) {
                   return console.log(err);
                 });

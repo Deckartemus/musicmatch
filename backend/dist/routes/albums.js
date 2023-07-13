@@ -17,7 +17,6 @@ exports.plugin = {
               method: "GET",
               path: "/api/albums/artistId={artistId}",
               handler: function handler(request, h) {
-                // return console.log(request.path, request.params);
                 return fetch("https://api.musixmatch.com/ws/1.1/artist.albums.get?artist_id=".concat(request.params.artistId, "&s_release_date=desc&g_album_name=1&apikey=").concat(apiKey)).then(function (response) {
                   return response.json();
                 }).then(function (data) {

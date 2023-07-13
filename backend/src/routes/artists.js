@@ -13,7 +13,7 @@ exports.plugin = {
         )
           .then(response => response.json())
           .then(data => {
-            return data;
+            return h.response(data).code(200);
           })
           .catch(err => console.log(err));
       },
